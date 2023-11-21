@@ -7,7 +7,7 @@ inline void sim_start(lc3::sim &simulator, const std::string &obj_filename) {
   // reset simulator
   simulator.zeroState();
 
-  // set start PC
+  // set start simulator
   simulator.loadObjFile(obj_filename);
   simulator.writePC(0x3000);
   simulator.setRunInstLimit(100000);

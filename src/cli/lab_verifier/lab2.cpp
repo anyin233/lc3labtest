@@ -33,13 +33,13 @@ void lab2Test(lc3::sim &simulator, const std::string &obj_filename,
 
     // set input
     uint16_t inNum = std::stoi(in, nullptr, 10);
-    simulator.writeMem(0x3100, inNum);
+    simulator.writeMem(0x3102, inNum);
 
     // get expected result
     auto expected = lab2Result(inNum);
 
     // start simulator
-    simulator.runUntilHalt();
+    simulator.run();
 
     // check result
     auto result = simulator.readMem(0x3103);
