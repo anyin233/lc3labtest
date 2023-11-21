@@ -25,8 +25,9 @@ uint16_t lab2Result(uint16_t N) {
   return result;
 }
 
-void lab2Test(lc3::sim &simulator, const std::string &obj_filename,
+int lab2Test(lc3::sim &simulator, const std::string &obj_filename,
               std::vector<std::string> testInput) {
+  uint32_t passed_count = 0;
   for (auto in : testInput) {
     // reset simulator
     sim_start(simulator, obj_filename);
@@ -45,12 +46,14 @@ void lab2Test(lc3::sim &simulator, const std::string &obj_filename,
     auto result = simulator.readMem(0x3103);
     if (expected == result) {
       std::cout << "Test case: " << in << " passed." << std::endl;
+      passed_count++;
     } else {
       std::cout << "Test case: " << in << " failed." << std::endl;
       std::cout << "Expected: " << expected << ", got: " << result
                 << std::endl;
     }
   }
+  return passed_count;
 }
 } // namespace verifier
 } // namespace lc3

@@ -1,5 +1,6 @@
 #include "./utils.hpp"
 #include "interface.h"
+#include <cstdint>
 
 namespace lc3 {
 namespace verifier {
@@ -15,8 +16,9 @@ uint16_t lab1Result(uint16_t input) {
   return result;
 }
 
-void lab1Test(lc3::sim &simulator, const std::string &obj_filename,
+int lab1Test(lc3::sim &simulator, const std::string &obj_filename,
               std::vector<std::string> testInput) {
+  uint32_t passed_count = 0;
   for (auto in : testInput) {
     // reset simulator
     sim_start(simulator, obj_filename);
@@ -36,6 +38,7 @@ void lab1Test(lc3::sim &simulator, const std::string &obj_filename,
     auto result = simulator.readMem(0x3102);
     if (expected + student_id == result) {
       std::cout << "Test case: " << in << " passed." << std::endl;
+      passed_count++;
     } else {
       std::cout << "Test case: " << in << " failed." << std::endl;
       std::cout << "Student ID: " << student_id << std::endl;
@@ -43,6 +46,7 @@ void lab1Test(lc3::sim &simulator, const std::string &obj_filename,
                 << std::endl;
     }
   }
+  return passed_count;
 }
 } // namespace verifier
 } // namespace lc3

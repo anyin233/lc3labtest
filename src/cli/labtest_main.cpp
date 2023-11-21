@@ -62,17 +62,22 @@ void labTestWrapper(std::string obj_filename, const CLIArgs &args) {
   lc3::ConsoleInputter inputter;
   lc3::sim simulator(*iprinter, inputter, args.print_level); 
   auto testInput = loadTestSet(args);
+
+  int passed_count = 0;
   switch (args.lab_id) {
     case 1:
-      lc3::verifier::lab1Test(simulator, obj_filename, testInput);
+      passed_count = lc3::verifier::lab1Test(simulator, obj_filename, testInput);
       break;
     case 2:
-      lc3::verifier::lab2Test(simulator, obj_filename, testInput);
+      passed_count = lc3::verifier::lab2Test(simulator, obj_filename, testInput);
       break;
     default:
       std::cerr << "Error: lab id " << args.lab_id << " not supported." << std::endl;
       exit(1);
   }
+
+  std::cout << "Passed " << passed_count << " out of " << testInput.size()
+            << " test cases." << std::endl;
 }
 
 int main(int argc, char *argv[]) {
