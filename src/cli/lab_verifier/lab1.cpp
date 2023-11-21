@@ -22,6 +22,7 @@ int lab1Test(lc3::sim &simulator, const std::string &obj_filename,
   for (auto in : testInput) {
     // reset simulator
     sim_start(simulator, obj_filename);
+    simulator.writePC(0x3000);
 
     // set input
     uint16_t inNum = std::stoi(in, nullptr, 10);
