@@ -68,7 +68,7 @@ double labTestWrapper(std::string obj_filename, const CLIArgs &args) {
   int passed_count = 0;
   switch (args.lab_id) {
     case 1:
-      passed_count = lc3::verifier::lab1Test(simulator, obj_filename, testInput);
+      passed_count = lc3::verifier::lab1Test(simulator, obj_filename, testInput, args.id_last_num);
       break;
     case 2:
       passed_count = lc3::verifier::lab2Test(simulator, obj_filename, testInput);
@@ -190,7 +190,6 @@ int main(int argc, char *argv[]) {
             ofs << "Error: cannot find .obj file" << std::endl;
 			              continue;
 		              }
-		  
 
           double testpoints = 0.0;
 		  testpoints = 100 * labTestWrapper(obj_filename, args);
