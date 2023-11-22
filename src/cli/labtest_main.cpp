@@ -1,5 +1,4 @@
-﻿#include "lab_verifier/lab2.hpp"
-#include <bitset>
+﻿#include <bitset>
 #include <cstdint>
 #include <iterator>
 #include <ostream>
