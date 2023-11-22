@@ -17,7 +17,7 @@ uint16_t lab1Result(uint16_t input) {
 }
 
 int lab1Test(lc3::sim &simulator, const std::string &obj_filename,
-              std::vector<std::string> testInput) {
+              std::vector<std::string> testInput, int stu_last_id) {
   uint32_t passed_count = 0;
   for (auto in : testInput) {
     // reset simulator
@@ -37,7 +37,7 @@ int lab1Test(lc3::sim &simulator, const std::string &obj_filename,
     // check result
     auto student_id = simulator.readMem(0x3101);
     auto result = simulator.readMem(0x3102);
-    if (expected + student_id == result) {
+    if (expected + stu_last_id == result && stu_last_id == student_id) {
       std::cout << "Test case: " << in << " passed." << std::endl;
       passed_count++;
     } else {
