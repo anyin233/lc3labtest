@@ -1,4 +1,4 @@
-#include "lab_verifier/lab2.hpp"
+ï»¿#include "lab_verifier/lab2.hpp"
 #include <bitset>
 #include <cstdint>
 #include <iterator>
@@ -140,12 +140,12 @@ int main(int argc, char *argv[]) {
                   files.push_back(p.path().string());
               }
           }
-          // dirname: PBxxx_name_labN_ÓâÆÚ
+          // dirname: PBxxx_name_labN_é€¾æœŸ
           std::string stu_id = sub_dir.substr(0, sub_dir.find_first_of('_'));
           // delete path
           stu_id = stu_id.substr(stu_id.find_last_of('\\') + 1);
           std::string name = sub_dir.substr(sub_dir.find_first_of('_') + 1, sub_dir.find_last_of('_') - sub_dir.find_first_of('_') - 1);
-          bool is_late = sub_dir.find("ÓâÆÚ") != std::string::npos;
+          bool is_late = sub_dir.find("é€¾æœŸ") != std::string::npos;
           args.id_last_num = std::stoi(stu_id.substr(stu_id.size() - 1));
 
           // create output.txt
