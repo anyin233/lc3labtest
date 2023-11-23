@@ -142,7 +142,11 @@ int main(int argc, char *argv[]) {
           // dirname: PBxxx_name_labN_逾期
           std::string stu_id = sub_dir.substr(0, sub_dir.find_first_of('_'));
           // delete path
+          #ifdef _WIN32
           stu_id = stu_id.substr(stu_id.find_last_of('\\') + 1);
+          #else
+          stu_id = stu_id.substr(stu_id.find_last_of('/') + 1);
+          #endif
           std::string name = sub_dir.substr(sub_dir.find_first_of('_') + 1, sub_dir.find_last_of('_') - sub_dir.find_first_of('_') - 1);
           bool is_late = sub_dir.find("逾期") != std::string::npos;
           args.id_last_num = std::stoi(stu_id.substr(stu_id.size() - 1));
