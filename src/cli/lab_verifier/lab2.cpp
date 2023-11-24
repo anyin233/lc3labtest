@@ -45,12 +45,13 @@ int lab2Test(lc3::sim &simulator, const std::string &obj_filename,
     // check result
     auto result = simulator.readMem(0x3103);
     if (expected == result) {
-      std::cout << "Test case: " << in << " passed." << std::endl;
+      std::cout << "Test case: " << in << " passed." << std::endl
+                << std::endl;
       passed_count++;
     } else {
       std::cout << "Test case: " << in << " failed." << std::endl;
       std::cout << "Expected: " << expected << ", got: " << result
-                << std::endl;
+                << std::endl << std::endl;
     }
   }
   return passed_count;

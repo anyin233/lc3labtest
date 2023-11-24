@@ -81,7 +81,8 @@ double labTestWrapper(std::string obj_filename, const CLIArgs &args) {
         exit(1);
     }
 
-    std::cout << "Passed " << passed_count << " out of " << testInput.size()
+    std::cout << "-------------------------"
+              << std::endl << "Passed " << passed_count << " out of " << testInput.size()
               << " test cases." << std::endl;
     return (double)passed_count / testInput.size();
 }
@@ -234,7 +235,7 @@ int main(int argc, char *argv[]) {
             }
             ofs.close();
 
-            std::cout << "Finished grading " << sub_dir << std::endl;
+            std::cout << "Finished grading " << sub_dir << std::endl << std::endl;
         }
     } else {
         std::string obj_filename;
