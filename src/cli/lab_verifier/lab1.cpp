@@ -38,12 +38,12 @@ int lab1Test(lc3::sim &simulator, const std::string &obj_filename,
     auto student_id = simulator.readMem(0x3101);
     auto result = simulator.readMem(0x3102);
     if (expected + stu_last_id == result && stu_last_id == student_id) {
-      std::cout << "Test case: " << in << " passed." << std::endl;
+      std::cout << "Test case: " << inNum << " passed." << std::endl;
       passed_count++;
     } else {
-      std::cout << "Test case: " << in << " failed." << std::endl;
-      std::cout << "Student ID: " << student_id << std::endl;
-      std::cout << "Expected: " << expected + student_id << ", got: " << result
+      std::cout << "Test case: " << inNum << " failed." << std::endl;
+      std::cout << "Stored student ID: " << student_id << std::endl;
+      std::cout << "Expected: " << expected + stu_last_id << ", got: " << result
                 << std::endl;
     }
   }
