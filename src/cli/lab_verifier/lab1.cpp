@@ -17,7 +17,7 @@ uint16_t lab1Result(uint16_t input) {
 }
 
 int lab1Test(lc3::sim &simulator, const std::string &obj_filename,
-              std::vector<std::string> testInput) {
+             std::vector<std::string> testInput) {
   uint32_t passed_count = 0;
   for (auto in : testInput) {
     // reset simulator
@@ -27,6 +27,8 @@ int lab1Test(lc3::sim &simulator, const std::string &obj_filename,
     // set input
     uint16_t inNum = std::stoi(in, nullptr, 10);
     simulator.writeMem(0x3100, inNum);
+    // set defualt student id to 10
+    simulator.writeMem(0x3101, 0xA);
 
     // get expected result
     auto expected = lab1Result(inNum);
@@ -38,12 +40,15 @@ int lab1Test(lc3::sim &simulator, const std::string &obj_filename,
     auto student_id = simulator.readMem(0x3101);
     auto result = simulator.readMem(0x3102);
     if (expected + student_id == result) {
-      std::cout << "Test case: " << in << " passed." << std::endl;
+      std::cout << "Test case: " << in << " passed, " ;
+      std::cout << "Student ID: " << student_id << ", ";
+      std::cout << "Expected: " << expected + student_id << ", Got: " << result
+                << std::endl;
       passed_count++;
     } else {
-      std::cout << "Test case: " << in << " failed." << std::endl;
-      std::cout << "Student ID: " << student_id << std::endl;
-      std::cout << "Expected: " << expected + student_id << ", got: " << result
+      std::cout << "Test case: " << in << " failed, ";
+      std::cout << "Student ID: " << student_id << ", ";
+      std::cout << "Expected: " << expected + student_id << ", Got: " << result
                 << std::endl;
     }
   }
