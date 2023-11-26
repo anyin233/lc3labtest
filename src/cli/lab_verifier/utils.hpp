@@ -31,9 +31,20 @@ inline void sim_start(lc3::sim &simulator, const std::string &obj_filename) {
   simulator.setRunInstLimit(1000000);
 }
 
-inline int check_result(const std::string &in, uint16_t expected, uint16_t result) {
+inline int check_result(const std::string &in, uint16_t expected, uint16_t result, bool sign) {
+  if (sign) {
+    int16_t s_expected = static_cast<int16_t>(expected);
+    int16_t s_result = static_cast<int16_t>(result);
+    if (s_expected == s_result) {
+      std::cout << "Test case " << in << " passed, got: " << s_result << std::endl;
+      return 1;
+    } else {
+      std::cout << "Test case " << in << " failed," << " Expected: " << s_expected << ", got: " << s_result << std::endl;
+      return 0;
+    }
+  }
   if (expected == result) {
-    std::cout << "Test case " << in << " passed," << " Expected: " << expected << ", got: " << result << std::endl;
+    std::cout << "Test case " << in << " passed, got: " << result << std::endl;
     return 1;
   } else {
     std::cout << "Test case " << in << " failed," << " Expected: " << expected << ", got: " << result << std::endl;
@@ -81,6 +92,10 @@ inline double labTestWrapper(std::string obj_filename, const CLIArgs &args) {
     case 2:
         passed_count =
             lc3::verifier::lab2Test(simulator, obj_filename, testInput);
+        break;
+    case 3:
+        passed_count =
+            lc3::verifier::lab3Test(simulator, obj_filename, testInput);
         break;
     default:
         std::cerr << "Error: lab id " << args.lab_id << " not supported."

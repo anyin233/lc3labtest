@@ -45,7 +45,7 @@ int lab2Test(lc3::sim &simulator, const std::string &obj_filename,
     // check result
     auto result = simulator.readMem(0x3103);
 
-    passed_count += check_result(in, expected, result);
+    passed_count += check_result(in, expected, result, false);
   }
   return passed_count;
 }

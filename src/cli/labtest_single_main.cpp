@@ -1,4 +1,3 @@
-#include "lab_verifier/lab2.hpp"
 #include <ostream>
 #include <string>
 #include <sys/types.h>
