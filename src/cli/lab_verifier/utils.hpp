@@ -42,7 +42,7 @@ inline int check_result(const std::string &in, uint16_t expected, uint16_t resul
 
 }
 
-std::vector<std::string> loadTestSet(const CLIArgs &args) {
+inline std::vector<std::string> loadTestSet(const CLIArgs &args) {
   // load test input from file
   const std::string &test_input_file = args.test_input_file;
   std::ifstream ifs(test_input_file);
@@ -60,7 +60,7 @@ std::vector<std::string> loadTestSet(const CLIArgs &args) {
   return testInput;
 }
 
-double labTestWrapper(std::string obj_filename, const CLIArgs &args) {
+inline double labTestWrapper(std::string obj_filename, const CLIArgs &args) {
     std::shared_ptr<lc3::utils::IPrinter> iprinter;
     if (args.log_file != "") {
         iprinter = std::make_shared<lc3::FilePrinter>(args.log_file);
