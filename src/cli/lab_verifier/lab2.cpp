@@ -31,7 +31,7 @@ int lab2Test(lc3::sim &simulator, const std::string &obj_filename,
   for (auto in : testInput) {
     // reset simulator
     sim_start(simulator, obj_filename);
-
+    simulator.setIgnorePrivilege(true); // required by lab2
     // set input
     uint16_t inNum = std::stoi(in, nullptr, 10);
     simulator.writeMem(0x3102, inNum);
@@ -40,19 +40,12 @@ int lab2Test(lc3::sim &simulator, const std::string &obj_filename,
     auto expected = lab2Result(inNum);
 
     // start simulator
-    simulator.run();
+    simulator.runUntilHalt();
 
     // check result
     auto result = simulator.readMem(0x3103);
-    if (expected == result) {
-      std::cout << "Test case: " << in << " passed." << std::endl
-                << std::endl;
-      passed_count++;
-    } else {
-      std::cout << "Test case: " << in << " failed." << std::endl;
-      std::cout << "Expected: " << expected << ", got: " << result
-                << std::endl << std::endl;
-    }
+
+    passed_count += check_result(in, expected, result);
   }
   return passed_count;
 }
