@@ -14,7 +14,7 @@ option(BUILD_SAMPLES "Build sample testers." ON)
 
 # set build flags
 if(NOT DEFINED MSVC)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fPIC")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17 -fPIC")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D_ENABLE_DEBUG -g -Wall -Wextra -Wno-format-security")
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -w -O2")
 else()

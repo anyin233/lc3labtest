@@ -21,6 +21,7 @@ inline int check_result(const std::string &in, uint16_t expected, uint16_t resul
     std::cout << "Test case " << in << " failed," << " Expected: " << expected << ", got: " << result << std::endl;
     return 0;
   }
+
 }
 
 #endif
