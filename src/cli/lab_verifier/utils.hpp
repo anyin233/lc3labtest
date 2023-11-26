@@ -15,10 +15,10 @@ inline void sim_start(lc3::sim &simulator, const std::string &obj_filename) {
 
 inline int check_result(const std::string &in, uint16_t expected, uint16_t result) {
   if (expected == result) {
-    std::cout << "Test case" << in << " passed," << " Expected: " << expected << ", got: " << result << std::endl;
+    std::cout << "Test case " << in << " passed," << " Expected: " << expected << ", got: " << result << std::endl;
     return 1;
   } else {
-    std::cout << "Test case" << in << " failed," << " Expected: " << expected << ", got: " << result << std::endl;
+    std::cout << "Test case " << in << " failed," << " Expected: " << expected << ", got: " << result << std::endl;
     return 0;
   }
 }

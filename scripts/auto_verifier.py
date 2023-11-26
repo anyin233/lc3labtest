@@ -12,7 +12,7 @@ pattern = r"[A-Z]{2}\d{8}"
 result_file = "result.csv"
 log_dir = "log"
 
-PATH_TO_LC3 = "/Users/cydia2001/git_repo/lc3tools/build/bin/labtest"
+PATH_TO_LC3 = "/Users/cydia2001/git_repo/lc3tools/build/bin/labtest-single"
 
 def get_filelist(dir):
     filelist = []
@@ -94,12 +94,16 @@ def main(args):
             count = int(outlines[-1].split()[1])
             total = int(outlines[-1].split()[-3])
             score = count / total * 2.5
-            if f"Student ID: {stu_id[-1]}" not in outlines[0]: # student ID not match
-                score -= total * 0.05   
+            
+            # lab 1 requires student ID as a part of result
+            if args.lab == 1:
+                if f"Student ID: {stu_id[-1]}" not in outlines[0]: # student ID not match
+                    score -= total * 0.05   
+                    
             score = max(0, score)
             f.write(f"{stu_id}, {count}/{total}, {score}\n")
             with open(os.path.join(log_dir, f"{stu_id}.log"), "w") as log:
-                log.write("\n".join(outlines))
+                log.write("\n".join(stdout.split("\n")))
   
 if __name__ == "__main__":
     args = parse_args()

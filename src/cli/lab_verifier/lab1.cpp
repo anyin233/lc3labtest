@@ -22,6 +22,8 @@ int lab1Test(lc3::sim &simulator, const std::string &obj_filename,
   for (auto in : testInput) {
     // reset simulator
     sim_start(simulator, obj_filename);
+    simulator.setIgnorePrivilege(true);
+    
     simulator.writePC(0x3000);
 
     // set input

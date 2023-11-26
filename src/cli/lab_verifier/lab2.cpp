@@ -15,11 +15,11 @@ uint16_t lab2Result(uint16_t N) {
       result = 2 * result - 2;
     }
 
+    result = result % 4096;
+
     if (result % 8 == 0 || result % 10 == 8) {
       b_n = !b_n;
     }
-
-    result = result % 4096;
   }
 
   return result;
