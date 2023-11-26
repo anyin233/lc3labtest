@@ -1,6 +1,7 @@
 #ifndef __LAB_UTILS__
 #define __LAB_UTILS__
 
+#include <cstdint>
 #define API_VER 2
 #include "interface.h"
 #include "console_inputter.h"
@@ -32,6 +33,17 @@ inline void sim_start(lc3::sim &simulator, const std::string &obj_filename) {
 }
 
 inline int check_result(const std::string &in, uint16_t expected, uint16_t result) {
+  if (expected == result) {
+    std::cout << "Test case " << in << " passed," << " Expected: " << expected << ", got: " << result << std::endl;
+    return 1;
+  } else {
+    std::cout << "Test case " << in << " failed," << " Expected: " << expected << ", got: " << result << std::endl;
+    return 0;
+  }
+
+}
+
+inline int check_result(const std::string &in, const std::string &expected, const std::string &result) {
   if (expected == result) {
     std::cout << "Test case " << in << " passed," << " Expected: " << expected << ", got: " << result << std::endl;
     return 1;
