@@ -83,7 +83,7 @@ def main(args):
             # print("Running test for student: {}".format(stu_id))
             pbar.set_description("Running test for student: {}".format(stu_id))
             result = subprocess.run(
-                [PATH_TO_LC3, f"--lab={args.lab}", f"--test-input={args.test_input}", "--print-level=3", file_path], 
+                [PATH_TO_LC3, f"--id={stu_id}", f"--lab={args.lab}", f"--test-input={args.test_input}", "--print-level=3", file_path], 
                 capture_output=True,
                 text=True
             )
