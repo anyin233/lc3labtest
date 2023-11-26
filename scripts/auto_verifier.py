@@ -89,12 +89,14 @@ def main(args):
             )
             stdout = result.stdout.strip()
             outlines = stdout.split("\n")
+            # print(outlines)
             outlines = [line for line in outlines if "Test case" in line or "Passed" in line]
             count = int(outlines[-1].split()[1])
             total = int(outlines[-1].split()[-3])
             score = count / total * 2.5
-            if "Student ID: 10" in outlines[0]:
-                score += total * 0.05
+            if f"Student ID: {stu_id[-1]}" not in outlines[0]: # student ID not match
+                score -= total * 0.05   
+            score = max(0, score)
             f.write(f"{stu_id}, {count}/{total}, {score}\n")
             with open(os.path.join(log_dir, f"{stu_id}.log"), "w") as log:
                 log.write("\n".join(outlines))
