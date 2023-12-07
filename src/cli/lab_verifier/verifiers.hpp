@@ -4,7 +4,7 @@
 #include "lab1.hpp"
 #include "lab2.hpp"
 #include "lab3.hpp"
-
+#include "lab4.hpp"
 
 
 #endif

@@ -9,6 +9,7 @@
 #include "../file_printer.h"
 #include "interface.h"
 #include "verifiers.hpp"
+#include <bitset>
 
 struct CLIArgs {
     uint32_t print_level = 3;
@@ -51,6 +52,28 @@ inline int check_result(const std::string &in, uint16_t expected, uint16_t resul
     return 0;
   }
 
+}
+
+inline int check_result(const std::string &in, std::vector<uint16_t> &expected, std::vector<uint16_t> &result) {
+  if (expected == result) {
+    std::cout << "Test case " << in << " passed, got: " << std::endl;
+    for (auto i : result) {
+      std::cout << std::bitset<16>(i) << std::endl;
+    }
+    std::cout << std::endl;
+    return 1;
+  } else {
+    std::cout << "Test case " << in << " failed," << " Expected: " << std::endl;
+    for (auto i : expected) {
+      std::cout << std::bitset<16>(i) << std::endl;
+    }
+    std::cout << std::endl << " got: " << std::endl;
+    for (auto i : result) {
+      std::cout << std::bitset<16>(i) << std::endl;
+    }
+    std::cout << std::endl;
+    return 0;
+  }
 }
 
 inline std::vector<std::string> loadTestSet(const CLIArgs &args) {
@@ -96,6 +119,10 @@ inline double labTestWrapper(std::string obj_filename, const CLIArgs &args) {
     case 3:
         passed_count =
             lc3::verifier::lab3Test(simulator, obj_filename, testInput);
+        break;
+    case 4:
+        passed_count =
+            lc3::verifier::lab4Test(simulator, obj_filename, testInput);
         break;
     default:
         std::cerr << "Error: lab id " << args.lab_id << " not supported."
