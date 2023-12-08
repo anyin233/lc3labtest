@@ -31,7 +31,7 @@ uint16_t put(uint16_t n, uint16_t state, std::vector<uint16_t> &expected) {
   }
   uint16_t state1 = remove(n - 2, put(n - 1, state, expected), expected) & (0xFFFE << (n - 1));
   expected.emplace_back(state1);
-  return put(n - 1, state1, expected);
+  return put(n - 2, state1, expected);
 }
 
 int lab4Test(lc3::sim &simulator, const std::string &obj_filename,
