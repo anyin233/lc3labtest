@@ -29,7 +29,7 @@ uint16_t put(uint16_t n, uint16_t state, std::vector<uint16_t> &expected) {
     expected.emplace_back(state & 0xFFFE);
     return state & 0xFFFE;
   }
-  uint16_t state1 = remove(n - 2, put(n - 1, state, expected), expected) & (0xFFFE << (n - 1));
+  uint16_t state1 = remove(n - 2, put(n - 1, state, expected), expected) & ~(1 << (n - 1));
   expected.emplace_back(state1);
   return put(n - 2, state1, expected);
 }
