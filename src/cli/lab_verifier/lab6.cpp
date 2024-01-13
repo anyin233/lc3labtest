@@ -13,7 +13,7 @@ namespace lc3 {
             testInput.emplace_back(std::string(2, rand() % 16 + 0x20));
             testInput.emplace_back(std::string(2, rand() % 69 + 0x3a));
             testInput.emplace_back("0");
-            testInput.emplace_back(std::string(1, rand() % 8 + 0x30));
+            testInput.emplace_back(std::string(1, rand() % 8 + 0x31));
             testInput.emplace_back("9");
 
             std::cout << "!!! Lab6 with ignore privilege mode disabled !!!\n"
