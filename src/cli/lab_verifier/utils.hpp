@@ -102,9 +102,12 @@ inline double labTestWrapper(std::string obj_filename, const CLIArgs &args) {
         iprinter = std::make_shared<lc3::ConsolePrinter>();
     }
 
-    lc3::ConsoleInputter inputter;
+    StringInputter inputter;
     lc3::sim simulator(*iprinter, inputter, args.print_level);
-    auto testInput = loadTestSet(args);
+    std::vector<std::string> testInput;
+    if (args.lab_id != 6) {
+        testInput = loadTestSet(args);
+    }
 
     int passed_count = 0;
     switch (args.lab_id) {
@@ -123,6 +126,10 @@ inline double labTestWrapper(std::string obj_filename, const CLIArgs &args) {
     case 4:
         passed_count =
             lc3::verifier::lab4Test(simulator, obj_filename, testInput);
+        break;
+    case 6:
+        passed_count =
+            lc3::verifier::lab6Test(simulator, obj_filename, inputter);
         break;
     default:
         std::cerr << "Error: lab id " << args.lab_id << " not supported."
