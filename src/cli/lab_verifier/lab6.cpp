@@ -39,7 +39,7 @@ namespace lc3 {
                 sim_start(simulator, obj_filename);
                 simulator.setRunInstLimit(200000);
                 simulator.setIgnorePrivilege(true);
-                inputter.setCharDelay(100000);
+                inputter.setCharDelay(60000);
                 // set input
                 inputter.setString(input);
 
