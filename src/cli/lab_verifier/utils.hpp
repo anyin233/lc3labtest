@@ -1,6 +1,7 @@
 #ifndef __LAB_UTILS__
 #define __LAB_UTILS__
 
+#include <memory>
 #define API_VER 2
 #include "interface.h"
 #include "console_inputter.h"
@@ -20,6 +21,7 @@ struct CLIArgs {
     uint32_t lab_id = 0;
     std::string stu_folder = "";
     bool result_in_output = false;
+    std::string stu_id = "";
 };
 
 inline void sim_start(lc3::sim &simulator, const std::string &obj_filename) {
@@ -98,6 +100,8 @@ inline double labTestWrapper(std::string obj_filename, const CLIArgs &args) {
     std::shared_ptr<lc3::utils::IPrinter> iprinter;
     if (args.log_file != "") {
         iprinter = std::make_shared<lc3::FilePrinter>(args.log_file);
+    } else if (args.lab_id == 6) {
+        iprinter = std::make_shared<StringVerifier>(args.stu_id);
     } else {
         iprinter = std::make_shared<lc3::ConsolePrinter>();
     }
@@ -128,8 +132,9 @@ inline double labTestWrapper(std::string obj_filename, const CLIArgs &args) {
             lc3::verifier::lab4Test(simulator, obj_filename, testInput);
         break;
     case 6:
+        // auto shared_printer = iprinter.get();
         passed_count =
-            lc3::verifier::lab6Test(simulator, obj_filename, inputter);
+            lc3::verifier::lab6Test(simulator, obj_filename, args.stu_id, inputter);
         break;
     default:
         std::cerr << "Error: lab id " << args.lab_id << " not supported."
@@ -137,9 +142,15 @@ inline double labTestWrapper(std::string obj_filename, const CLIArgs &args) {
         exit(1);
     }
 
+    if (args.lab_id == 6) {
+        std::cout << "------------------------"
+                  << std::endl << "Passed " << passed_count << " test cases." << std::endl;
+        return passed_count / 100.0 / 10.0;
+    }
     std::cout << "-------------------------"
               << std::endl << "Passed " << passed_count << " out of " << testInput.size()
               << " test cases." << std::endl;
+
     return (double)passed_count / testInput.size();
 }
 

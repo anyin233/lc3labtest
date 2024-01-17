@@ -1,6 +1,7 @@
 #include <bitset>
 #include <chrono>
 #include <cstdint>
+#include <exception>
 #include <filesystem>
 #include <fstream>
 #include <iterator>
@@ -97,6 +98,7 @@ int main(int argc, char *argv[]) {
 #else
             stu_id = stu_id.substr(stu_id.find_last_of('/') + 1);
 #endif
+            args.stu_id = stu_id;
             std::string name = sub_dir.substr(
                 sub_dir.find_first_of('_') + 1,
                 sub_dir.find_last_of('_') - sub_dir.find_first_of('_') - 1);
@@ -138,7 +140,8 @@ int main(int argc, char *argv[]) {
             }
             // compile
             std::string obj_filename;
-            if (bin_file != "") {
+            try {
+                if (bin_file != "") {
                 converter.convertBin(bin_file);
                 obj_filename = std::string(
                     bin_file.substr(0, bin_file.find_last_of('.')) + ".obj");
@@ -146,6 +149,9 @@ int main(int argc, char *argv[]) {
                 assembler.assemble(asm_file);
                 obj_filename = std::string(
                     asm_file.substr(0, asm_file.find_last_of('.')) + ".obj");
+            }
+            } catch (std::exception e) {
+                continue;
             }
             // if .obj file not found
             if (!std::filesystem::exists(obj_filename)) {

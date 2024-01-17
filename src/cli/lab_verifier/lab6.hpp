@@ -6,7 +6,7 @@
 
 namespace lc3 {
     namespace verifier {
-        int lab6Test(lc3::sim &simulator, const std::string &obj_filename, StringInputter &inputter);
+        int lab6Test(lc3::sim &simulator, const std::string &obj_filename, const std::string &stu_id, StringInputter &inputter);
     }
 } // namespace lc3
 
